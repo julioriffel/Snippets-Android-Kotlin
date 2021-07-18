@@ -9,6 +9,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.julioriffel.snippets_android_kotlin.databinding.ActivityMainBinding
 
+
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
@@ -19,7 +20,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
         binding.btPermissoes.setOnClickListener { startPermissoes() }
         binding.btBarcode.setOnClickListener { startPermissoes() }
+
     }
+
 
     private fun startPermissoes() {
         startActivity(

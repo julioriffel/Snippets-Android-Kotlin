@@ -6,9 +6,11 @@
 package com.agropackingsolutions.leitor.util
 
 import android.content.Context
+import android.media.AudioManager
 import android.media.RingtoneManager
+import android.media.ToneGenerator
 import android.widget.Toast
-import com.agropackingsolutions.leitor.R
+import com.julioriffel.snippets_android_kotlin.R
 
 
 fun unrecognizedCode(context: Context, callbackClear: () -> Unit = {}) {
@@ -27,11 +29,16 @@ fun unrecognizedCode(context: Context, callbackClear: () -> Unit = {}) {
  * Para que seja possível lançar um sinal sonoro logo
  * após a leitura de algum código de barra.
  * */
-fun notification(context: Context) {
+fun notificationDefault(context: Context) {
     try {
         val notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val ringtone = RingtoneManager.getRingtone(context.applicationContext, notification)
         ringtone.play()
     } catch (e: Exception) {
     }
+}
+
+fun notificationBeep() {
+    val toneG = ToneGenerator(AudioManager.STREAM_ALARM, 100)
+    toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 200)
 }

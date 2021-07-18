@@ -4,7 +4,6 @@
 
 package com.julioriffel.snippets_android_kotlin.ui
 
-import android.media.RingtoneManager
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +17,7 @@ class LerCodigoBarrasActivity : AppCompatActivity(), ZXingScannerView.ResultHand
     val REQUEST_CODE_CAMERA = 182 /* Inteiro aleatório */
     private lateinit var binding: ActivityLerCodigoBarrasBinding
     var msg: String = ""
+    var ultimo: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,14 +34,12 @@ class LerCodigoBarrasActivity : AppCompatActivity(), ZXingScannerView.ResultHand
          * documentação, o código entra no onResume().
          * */
         binding.zXingScanner.setResultHandler(this)
-
-        restartCameraIfInactive()
+        startCamera()
     }
 
-    private fun restartCameraIfInactive() {
-        if (!binding.zXingScanner.isCameraStarted()) {
-            startCamera()
-        }
+    override fun onPause() {
+        super.onPause()
+        binding.zXingScanner.stopCamera() // Stop camera on pause
     }
 
 
@@ -67,37 +65,32 @@ class LerCodigoBarrasActivity : AppCompatActivity(), ZXingScannerView.ResultHand
             return
         }
 
-        processBarcodeResult(
-            result.text,
-            result.barcodeFormat.name
-        )
+        processBarcodeResult(result.text, result.barcodeFormat.name)
     }
 
     private fun processBarcodeResult(text: String, barcodeFormatName: String) {
 
+        binding.zXingScanner.resumeCameraPreview(this)
 
+        if (text == ultimo) {
+            return
+        }
+        ultimo = text
+        notificationBeep()
         /* Modificando interface do usuário. */
         binding.tvContent.text = text
-        var msg = "${barcodeFormatName}:${text}\n" + msg
-
+        msg = "${barcodeFormatName}:${text}\n" + msg
         binding.tvResumo.text = msg
         binding.tvBarCodeType.text = "${getString(R.string.barcode_format)}$barcodeFormatName"
 
-        try {
-            val notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-            val r = RingtoneManager.getRingtone(applicationContext, notification)
-            r.play()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-
-        binding.zXingScanner.resumeCameraPreview(this)
     }
 
 
     fun clearContent(view: View? = null) {
         binding.tvContent.text = getString(R.string.nothing_read)
-
+        ultimo = ""
+        msg = ""
+        binding.tvResumo.text = ""
     }
 
 
@@ -121,8 +114,4 @@ class LerCodigoBarrasActivity : AppCompatActivity(), ZXingScannerView.ResultHand
         }
     }
 
-    private fun turnOffFlashlight() {
-        binding.ibFlashlight.tag = true
-        flashLight()
-    }
 }

@@ -60,7 +60,7 @@ Em `AndroidManifest.xml` adicionar:
         android:icon="@mipmap/ic_launcher" ...
 ```
 
-[codigo Activity](src/main/java/com/julioriffel/snippets_android_kotlin/ui/PermissoesActivity.kt)
+[codigo Activity](app/src/main/java/com/julioriffel/snippets_android_kotlin/ui/PermissoesActivity.kt)
 
 ### Codido de Barras
 ```
@@ -68,4 +68,6 @@ Em `AndroidManifest.xml` adicionar:
         exclude module: 'support-v4'
     }
 ```
-[codigo Activity](src/main/java/com/julioriffel/snippets_android_kotlin/ui/LerCodigoBarrasActivity.kt)
+[codigo Activity](app/src/main/java/com/julioriffel/snippets_android_kotlin/ui/LerCodigoBarrasActivity.kt)
+Fonte
+[Leitor de Códigos no Android com Barcode Scanner API - ZXing Vinícius Thiengo](https://www.thiengo.com.br/leitor-de-codigos-no-android-com-barcode-scanner-api-zxing)

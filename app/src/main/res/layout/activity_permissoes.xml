@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2021. Julio Cezar Riffel<julioriffel@gmail.com>
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.PermissoesActivity">
+
+
+    <Button
+        android:id="@+id/button_camera"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:text="@string/permission_camera_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
+        android:id="@+id/button_storage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/permission_storage_text"
+        app:layout_constraintEnd_toEndOf="@id/button_camera"
+        app:layout_constraintStart_toStartOf="@id/button_camera"
+        app:layout_constraintTop_toBottomOf="@id/button_camera" />
+
+    <Button
+        android:id="@+id/button_location_and_contacts"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/permission_location_and_contacts_text"
+        app:layout_constraintEnd_toEndOf="@id/button_camera"
+        app:layout_constraintStart_toStartOf="@id/button_camera"
+        app:layout_constraintTop_toBottomOf="@id/button_storage" />
+
+    <!--    <androidx.fragment.app.FragmentContainerView-->
+    <!--        android:id="@+id/fragment"-->
+    <!--        android:name="com.vmadalin.easypermissions.sample.MainFragment"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        app:layout_constraintEnd_toEndOf="@id/button_camera"-->
+    <!--        app:layout_constraintStart_toStartOf="@id/button_camera"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/button_location_and_contacts"-->
+    <!--        tools:layout="@layout/fragment_main" />-->
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
